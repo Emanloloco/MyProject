@@ -1,0 +1,14 @@
+package calculation;
+
+public class Calculation {
+    public static void main(String[] args) {
+        int length = 56; //This is the variable for length.
+        int width = 69; //This is the variable for width.
+        int area = length * width; //This is the formula for area.
+        int perimeter = 2 * (length + width); //This is the formula for perimeter.
+        
+        System.out.println("The area is equal to " + area); //This executes the command to print the string and the variable area.
+        System.out.println("The perimeter is " + perimeter); //This executes the command to print the string and the variable perimeter.
+    }
+    
+}
