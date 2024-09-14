@@ -3,13 +3,17 @@ import java.util.Scanner;  // Import the Scanner class
 
 class User_Input {
   public static void main(String[] args) {
+      
     Scanner inputName = new Scanner(System.in);  // Create a Scanner for user's name
     System.out.println("What is your name?"); // Prints first question for first input
     String yourName = inputName.nextLine(); // Read user's name input
     
-    Scanner inputAge = new Scanner(System.in); // Create a Scanner for user's age
-    System.out.println("and what is your age?"); // Prints the second question for second input
-    String yourAge = inputAge.nextLine(); // Read user age input
+    Scanner inputBirthYear = new Scanner(System.in); // Create a Scanner for user's age
+    System.out.println("What is your birth year?"); // Prints the second question for second input
+    int yourBirthYear = inputBirthYear.nextInt(); // Read user age input
+    
+    int currentYear = 2024;
+    int yourAge = (currentYear - yourBirthYear); // Computation to get age
     
     System.out.println("Name: " + yourName + "\nAge: " + yourAge); // Prints name and age with the inputs
   }
