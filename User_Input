@@ -1,0 +1,13 @@
+class User_Input {
+  public static void main(String[] args) {
+    Scanner inputName = new Scanner(System.in);  // Create a Scanner for user's object
+    System.out.println("What is your name?");
+    String yourName = inputName.nextLine(); // Read user's name input
+    
+    Scanner inputAge = new Scanner(System.in); // 
+    System.out.println("and what is your age?");
+    String yourAge = inputAge.nextLine(); // Read user age input
+    
+    System.out.println("Name: " + yourName + "\nAge: " + yourAge); // Output of name and age
+  }
+}
