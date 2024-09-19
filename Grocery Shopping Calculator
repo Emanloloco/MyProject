@@ -1,0 +1,61 @@
+package grocery.shopping.calculator;
+import java.util.Scanner;
+
+public class GroceryShoppingCalculator {
+    public static void main(String[] args) {      
+        
+        // Define the prices for the items
+        int PotatoChipsPrice = 100, ChocolateCookiesPrice = 150, FruitJuicePrice = 50;
+        
+        // Get the item
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Select the item of your choice, please.");
+        System.out.println("Potato Chips");
+        System.out.println("Chocolate Cookies");
+        System.out.println("Fruit Juice");
+        String itemName = myObj.nextLine();
+        
+        // Get the quantity
+        System.out.println("How many " + itemName + " would you like to buy?");
+        int qty = myObj.nextInt();
+        
+        // Declare a variable for the item price
+        int price = 0;
+
+        // Determine the price based on the itemName
+        if (itemName.equalsIgnoreCase("Potato Chips")) {
+            price = PotatoChipsPrice;
+        } else if (itemName.equalsIgnoreCase("Chocolate Cookies")) {
+            price = ChocolateCookiesPrice;
+        } else if (itemName.equalsIgnoreCase("Fruit Juice")) {
+            price = FruitJuicePrice;
+        } else {
+            System.out.println("Invalid item selected.");
+            return;
+        }
+        
+        // Calculate Subtotal price
+        int subTotalPrice = price * qty;
+        
+        // Calculate discount
+        double discountAmount = subTotalPrice * 0.05;
+        
+        // Calculate Sales Tax
+        double salesTax = (subTotalPrice - discountAmount) * 0.12;
+        
+        // Calcuate Total price
+        double totalPrice = (subTotalPrice - discountAmount) + salesTax;
+        
+        // Display Subtotal price
+        System.out.println("Subtotal: " + subTotalPrice);
+        
+        // Display Discount Amount
+        System.out.println("Discount: " + discountAmount);
+        
+        // Display Sales Tax
+        System.out.println("Sales Tax: " + salesTax);
+        
+        // Display the Total price
+        System.out.println("The total price for " + qty + " " + itemName + " is PHP " + totalPrice);
+    }
+}
