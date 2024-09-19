@@ -1,0 +1,152 @@
+package grading_system;
+import java.util.Scanner;
+
+public class Grading_System {
+    public static void main(String[] args) {
+        Scanner filipinoGrade = new Scanner(System.in);
+        System.out.println("What is the grade of the student each subject?");
+        System.out.print("Filipino");
+        int letterGradeFilipino = filipinoGrade.nextInt();
+          
+        if (letterGradeFilipino >= 85) {
+            System.out.println('A');
+        } else if (letterGradeFilipino >= 80) {
+            System.out.println('B');
+        } else if (letterGradeFilipino >= 75) {
+            System.out.println('C');
+        } else if (letterGradeFilipino >= 70) {
+            System.out.println('D');
+        } else if (letterGradeFilipino >= 65) {
+            System.out.println('E');
+        } else if (letterGradeFilipino >= 60) {
+            System.out.println('F');
+        } else {
+            System.out.println('N');
+        }
+        
+        Scanner apGrade = new Scanner(System.in);
+        System.out.println("AP");
+        int letterGradeAp = apGrade.nextInt();
+        
+        if (letterGradeAp >= 85) {
+            System.out.println('A');
+        } else if (letterGradeAp >= 80) {
+            System.out.println('B');
+        } else if (letterGradeAp >= 75) {
+            System.out.println('C');
+        } else if (letterGradeAp >= 70) {
+            System.out.println('D');
+        } else if (letterGradeAp >= 65) {
+            System.out.println('E');
+        } else if (letterGradeAp >= 60) {
+            System.out.println('F');
+        } else {
+            System.out.println('N');
+        }
+        
+        Scanner mapehGrade = new Scanner(System.in);
+        System.out.print("MAPEH");
+        int letterGradeMapeh = mapehGrade.nextInt();
+        
+        if (letterGradeMapeh >= 85) {
+            System.out.println('A');
+        } else if (letterGradeMapeh >= 80) {
+            System.out.println('B');
+        } else if (letterGradeMapeh >= 75) {
+            System.out.println('C');
+        } else if (letterGradeMapeh >= 70) {
+            System.out.println('D');
+        } else if (letterGradeMapeh >= 65) {
+            System.out.println('E');
+        } else if (letterGradeMapeh >= 60) {
+            System.out.println('F');
+        } else {
+            System.out.println('N');
+        }
+        
+        Scanner englishGrade = new Scanner(System.in);
+        System.out.print("English");
+        int letterGradeEnglish = englishGrade.nextInt();
+        
+        if (letterGradeEnglish >= 85) {
+            System.out.println('A');
+        } else if (letterGradeEnglish >= 80) {
+            System.out.println('B');
+        } else if (letterGradeEnglish >= 75) {
+            System.out.println('C');
+        } else if (letterGradeEnglish >= 70) {
+            System.out.println('D');
+        } else if (letterGradeEnglish >= 65) {
+            System.out.println('E');
+        } else if (letterGradeEnglish >= 60) {
+            System.out.println('F');
+        } else {
+            System.out.println('N');
+        }
+        
+        Scanner mathGrade = new Scanner(System.in);
+        System.out.print("Math");
+        int letterGradeMath = mathGrade.nextInt();
+        
+        if (letterGradeMath >= 85) {
+            System.out.println('A');
+        } else if (letterGradeMath >= 80) {
+            System.out.println('B');
+        } else if (letterGradeMath >= 75) {
+            System.out.println('C');
+        } else if (letterGradeMath >= 70) {
+            System.out.println('D');
+        } else if (letterGradeMath >= 65) {
+            System.out.println('E');
+        } else if (letterGradeMath >= 60) {
+            System.out.println('F');
+        } else {
+            System.out.println('N');
+        }
+        
+        Scanner scienceGrade = new Scanner(System.in);
+        System.out.print("Science");
+        int letterGradeScience = scienceGrade.nextInt();
+        
+        if (letterGradeScience >= 85) {
+            System.out.println('A');
+        } else if (letterGradeScience >= 80) {
+            System.out.println('B');
+        } else if (letterGradeScience >= 75) {
+            System.out.println('C');
+        } else if (letterGradeScience >= 70) {
+            System.out.println('D');
+        } else if (letterGradeScience >= 65) {
+            System.out.println('E');
+        } else if (letterGradeScience >= 60) {
+            System.out.println('F');
+        } else {
+            System.out.println('N');
+        }
+        
+        Scanner tleGrade = new Scanner(System.in);
+        System.out.print("TLE");
+        int letterGradeTle = tleGrade.nextInt();
+        
+        if (letterGradeTle >= 85) {
+            System.out.println('A');
+        } else if (letterGradeTle >= 80) {
+            System.out.println('B');
+        } else if (letterGradeTle >= 75) {
+            System.out.println('C');
+        } else if (letterGradeTle >= 70) {
+            System.out.println('D');
+        } else if (letterGradeTle >= 65) {
+            System.out.println('E');
+        } else if (letterGradeTle >= 60) {
+            System.out.println('F');
+        } else {
+            System.out.println('N');
+        }
+        
+        double avg = (letterGradeFilipino + letterGradeAp + letterGradeMapeh + letterGradeEnglish + letterGradeMath + letterGradeScience + letterGradeTle) / 7.0;
+        
+        System.out.println("Average: " + avg);
+    }
+    
+}
