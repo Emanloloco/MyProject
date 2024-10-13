@@ -13,13 +13,14 @@ public class Employee1 {
         this.Wage = wage;
         this.HoursWorked = hoursWorked;
     }
-    public double calculateSalary(){
+    public double calculateSalary(double hoursWorked){
         double salary = 0;
-        String ID;
-        String Name;
-        double Wage = 0;
-        double HoursWorked = 0;
-        salary = Wage * HoursWorked;
+        salary = Wage * hoursWorked;
+        System.out.println("ID: " + ID + "\nName: " + Name + "\nWage: " + Wage + "\nHoursWorked: " + hoursWorked);
         return salary;
+    }
+    
+    public String displayEmployeeDetails(double hoursWorked) {
+        return "ID: " + ID + "\nName: " + Name + "\nWage: " + Wage + "\nHoursWorked: " + hoursWorked;
     }
 }
