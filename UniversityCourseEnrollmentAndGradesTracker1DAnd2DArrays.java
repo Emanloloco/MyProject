@@ -1,5 +1,4 @@
 package university.course.enrollment.and.grades.tracker.pkg1d.and.pkg2d.arrays;
-
 import java.util.Scanner;
 
 public class UniversityCourseEnrollmentAndGradesTracker1DAnd2DArrays {
