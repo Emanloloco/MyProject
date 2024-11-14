@@ -14,6 +14,7 @@ public class UniversityCourseEnrollmentAndGradesTracker1DAnd2DArrays {
         // Store students' grades in array.
         double[][] myStudentsGrades = new double[studentsNum][subjectsNum];
 
+        // Create a variable for array length.
         int mySubjectsGradesRow = myStudentsGrades.length;
         
         // Create a Scanner object to take input from the user
@@ -36,15 +37,15 @@ public class UniversityCourseEnrollmentAndGradesTracker1DAnd2DArrays {
                 totalGrades += subjectGrades;
             }
             myObj.nextLine();
+            System.out.println();
             
             // Formula to get the average grade.
             averageGrade[i] = (double) totalGrades / mySubjectsGradesColumn;
         }
-        System.out.println();
         
         // Display students name and average grade.
         for (int k = 0; k < mySubjectsGradesRow; k++) {
-            System.out.println("The average grade of " + myStudents[k] + " is " + averageGrade[k]);
+            System.out.println("The average grade of " + myStudents[k] + " is " + String.format("%.2f",averageGrade[k]));
         }
     }
 }
