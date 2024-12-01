@@ -1,4 +1,5 @@
 package exception.handling.laboratory;
+
 import java.util.Scanner;
 
 public class ExceptionHandlingLaboratory {
@@ -107,9 +108,6 @@ public class ExceptionHandlingLaboratory {
             String bankOption = input.nextLine();
             if (bankOption.equalsIgnoreCase("Withdraw")) {
                 action.withdrawAmount();
-                if (true) {
-                    loopChecker = true;
-                }
             } else if (bankOption.equalsIgnoreCase("Deposit")) {
                 action.depositAmount();
                 break;
@@ -118,7 +116,7 @@ public class ExceptionHandlingLaboratory {
                 break;
             } else if (bankOption.equalsIgnoreCase("Exit")) {
                 System.out.println("Thank you for using our services! \nThe program will now be terminated.");
-                break;
+                loopChecker = true;
             } else {
                 System.out.println("Invalid Input, please try again");
             }
