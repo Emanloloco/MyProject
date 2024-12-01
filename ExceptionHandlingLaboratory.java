@@ -57,7 +57,7 @@ public class ExceptionHandlingLaboratory {
                     return true; // Terminates the loop
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid amount! Umayos ka!");
+                System.out.println("Invalid Input Luhh kulit ka?");
             }
         }
     }
