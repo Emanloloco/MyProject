@@ -1,14 +1,14 @@
-package exception.handling.laboratory;
+package banking.sytem;
 
 import java.util.Scanner;
 
-public class ExceptionHandlingLaboratory {
+public class BankingSystem {
 
     String userName;
     int accountBalance;
 
     // Constructor
-    public ExceptionHandlingLaboratory(String userName, int accountBalance) {
+    public BankingSystem(String userName, int accountBalance) {
         this.userName = userName;
         this.accountBalance = accountBalance;
     }
@@ -49,7 +49,7 @@ public class ExceptionHandlingLaboratory {
             }
             try {
                 int deposit = Integer.parseInt(bankOption);
-                if (deposit <= 0) { // If deposit amount is less than 0
+                if (deposit < 0) { // If deposit amount is less than 0
                     System.out.println("Invalid amount. Please enter a valid amount!");
                 } else {
                     accountBalance += deposit; // Add the deposit amount to the total of account balance
@@ -98,7 +98,7 @@ public class ExceptionHandlingLaboratory {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        ExceptionHandlingLaboratory action = new ExceptionHandlingLaboratory("Steven Paulo Perando", 100000);
+        BankingSystem action = new BankingSystem("Steven Paulo Perando", 100000);
 
         action.sayHi();
         boolean loopChecker = false;
