@@ -13,17 +13,18 @@ public class ExceptionHandlingLaboratory {
     }
 
     Scanner input = new Scanner(System.in);
-    
-    public class InsufficientFundsException extends Exception {
-    private int amount;
+
+    public class InsufficientFundsException extends Exception { // Custom exception for withdrawal
+
+        private int amountWithdraw;
 
         public InsufficientFundsException(int amount) {
-            super("Insufficient funds for withdrawal: " + amount);
-            this.amount = amount;
+            super("Insufficient funds for withdrawal: " + amount); // Gets called when typed e.getMessage()
+            this.amountWithdraw = amount;
         }
 
-        public int getAmount() {
-            return amount;
+        public int getAmountWithdraw() {
+            return amountWithdraw;
         }
     }
 
@@ -57,7 +58,7 @@ public class ExceptionHandlingLaboratory {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid amount! Umayos ka!");
-            } 
+            }
         }
     }
 
@@ -76,20 +77,21 @@ public class ExceptionHandlingLaboratory {
                 if (amountWithdraw > accountBalance) { // If the amount withdraw is greater than the value of account balance
                     throw new InsufficientFundsException(amountWithdraw);
                 } else if (amountWithdraw <= 0) {                   // If the amount withdraw is less than or equal to 0
-                    System.out.println("Invalid input. Please enter a valid numeric amount!");
+                    System.out.println("Invalid withdrawal amount! Please enter a positive amount.");
                 } else {
                     accountBalance -= amountWithdraw; // Subtract amount withdrawn to the total of account balance
                     System.out.println("Your withdrawal has been processed! Remaining balance: " + accountBalance);
                     break; // Terminates the loop
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid amount!");
+                System.out.println("Invalid input. Please enter a valid numeric amount!");
             } catch (InsufficientFundsException e) {
-                System.out.println("Insufficient funds for withdrawal!");
+                System.out.println(e.getMessage());
             }
         }
     }
-        // Print balance
+    // Print balance
+
     public void checkBalance() {
         System.out.println("Your current balance is: " + accountBalance);
     }
