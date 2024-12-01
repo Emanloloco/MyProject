@@ -39,14 +39,13 @@ public class ExceptionHandlingLaboratory {
     }
 
     // Logic for deposit function
-    public void depositAmount() {
+    public boolean depositAmount() {
         System.out.println("Enter the amount you would like to deposit.");
-
         while (true) {
             String bankOption = input.nextLine();
             if (bankOption.equalsIgnoreCase("Back")) {
                 System.out.println("Returning to the Main Menu");
-                break;
+                return false;
             }
             try {
                 int deposit = Integer.parseInt(bankOption);
@@ -55,7 +54,7 @@ public class ExceptionHandlingLaboratory {
                 } else {
                     accountBalance += deposit; // Add the deposit amount to the total of account balance
                     System.out.println("Your despoit has been successfully added to your balance \nYour new balance is: " + accountBalance);
-                    break; // Terminates the loop
+                    return true; // Terminates the loop
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid amount! Umayos ka!");
@@ -64,13 +63,13 @@ public class ExceptionHandlingLaboratory {
     }
 
     // Logic function for withdraw function
-    public void withdrawAmount() {
+    public boolean withdrawAmount() {
         System.out.println("How much would you like to withdraw?");
         while (true) {
             String bankOption = input.nextLine();
             if (bankOption.equalsIgnoreCase("Back")) {
                 System.out.println("Returning to the Main Menu");
-                break;
+                return false;
             }
             try {
                 int amountWithdraw = Integer.parseInt(bankOption);
@@ -82,7 +81,7 @@ public class ExceptionHandlingLaboratory {
                 } else {
                     accountBalance -= amountWithdraw; // Subtract amount withdrawn to the total of account balance
                     System.out.println("Your withdrawal has been processed! Remaining balance: " + accountBalance);
-                    break; // Terminates the loop
+                    return true; // Terminates the loop
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid numeric amount!");
@@ -103,20 +102,20 @@ public class ExceptionHandlingLaboratory {
 
         action.sayHi();
         boolean loopChecker = false;
+        
         while (!loopChecker) {
             action.bankOptions();
             String bankOption = input.nextLine();
             if (bankOption.equalsIgnoreCase("Withdraw")) {
-                action.withdrawAmount();
+                loopChecker = action.withdrawAmount(); // Update loopChecker based on success
             } else if (bankOption.equalsIgnoreCase("Deposit")) {
-                action.depositAmount();
-                break;
+                loopChecker = action.depositAmount(); // Update loopChecker based on success
             } else if (bankOption.equalsIgnoreCase("Check Balance")) {
                 action.checkBalance();
-                break;
+                loopChecker = true; // Ends the loop after checking balance
             } else if (bankOption.equalsIgnoreCase("Exit")) {
                 System.out.println("Thank you for using our services! \nThe program will now be terminated.");
-                loopChecker = true;
+                loopChecker = true; // Ends the loop
             } else {
                 System.out.println("Invalid Input, please try again");
             }
