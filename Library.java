@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Library {
 
-    private final ArrayList<Book> books; // List to store books in the library
+    private ArrayList<Book> books; // List to store books in the library
 
     // Constructor to initialize the library
     public Library() {
