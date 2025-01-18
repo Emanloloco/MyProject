@@ -27,8 +27,9 @@ public class LibraryManagementSystem {
         System.out.println("You've successfully added three books!");
         System.out.println();
         
+        boolean loopBreaker = true; // Boolean to break loop
+        
         // Loop for the menu.
-        boolean loopBreaker = true;
         while (loopBreaker) {
             System.out.println("What would you like to do?");
             System.out.println("A. Display all books \nB. Borrow a book \nC. Return a book \nD. Search for a book by title \nE. Exit");
@@ -41,7 +42,9 @@ public class LibraryManagementSystem {
                 case "B":
                     System.out.println("Which book would you like to borrow?");
                     String borrowBookTitle = myObj.nextLine();
-                    Book bookToBorrow = library.getBookByTitle(borrowBookTitle);
+                    Book bookToBorrow = library.getBookByTitle(borrowBookTitle); 
+                    
+                    // Perform search for book, if book was found, get the book.
                     if (bookToBorrow != null) {
                         bookToBorrow.borrowBook(borrowBookTitle); // Borrow book.
                     } else {
@@ -52,6 +55,8 @@ public class LibraryManagementSystem {
                     System.out.println("Which book would you like to return?");
                     String returnTitle = myObj.nextLine();
                     Book bookToReturn = library.getBookByTitle(returnTitle);
+                    
+                    // Perform search for book, if book was not found, return the book.
                     if(bookToReturn != null) {
                         bookToReturn.returnBook(returnTitle); // Return book.
                     } else {
@@ -65,7 +70,7 @@ public class LibraryManagementSystem {
                     break;
                 case "E":
                     System.out.println("The program has been terminated");
-                    loopBreaker = false;
+                    loopBreaker = false; // Break loop
             }
         System.out.println();
         }
