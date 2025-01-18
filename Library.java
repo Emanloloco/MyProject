@@ -17,6 +17,7 @@ public class Library {
         System.out.println("You've added " + book.getTitle() + " to the library!");
     }
 
+    // Display all books information
     public void displayAllBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in the library");
@@ -28,10 +29,11 @@ public class Library {
         }
     }
 
+    // Book information searcher.
     public void searchBookByTitle(String title) {
-        for (int j = 0; j < books.size(); j++) {
+        for (int j = 0; j < books.size(); j++) { // Search for book by title.
             Book book = books.get(j);
-            if (book.getTitle().equalsIgnoreCase(title)) {
+            if (book.getTitle().equalsIgnoreCase(title)) { // If book was found, return info to the requestor.
                 book.displayBookDetails();
                 return;
             }
@@ -39,10 +41,11 @@ public class Library {
         System.out.println("The book you are looking for is not found!");
     }
 
+    // Book getter.
     public Book getBookByTitle(String title) {
-        for (int k = 0; k < books.size(); k++) {
+        for (int k = 0; k < books.size(); k++) { // Search for book by title.
             Book book = books.get(k);
-            if (book.getTitle().equals(title)) {
+            if (book.getTitle().equals(title)) { // If book was found, return value to requestor.
                 return book;
             }
         }
