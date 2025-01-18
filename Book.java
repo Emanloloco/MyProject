@@ -26,7 +26,7 @@ public class Book {
     public void displayBookDetails() {
         String availability;
         if(isAvailable) {
-        availability = "YES";    
+            availability = "YES";    
         } else {
             availability = "NO";
         }
@@ -35,7 +35,6 @@ public class Book {
 
     // Borrow book marker
     public void borrowBook(String title) {
-        System.out.println("Which book would you like to borrow?");
         if (isAvailable) {
             System.out.println("You have borrowed " + title);
             isAvailable = false;
@@ -44,9 +43,8 @@ public class Book {
         }
     }
 
-    // Returned book marker
+    // Return book marker
     public void returnBook(String title) {
-        System.out.println("Which book are you returning?");
         if (!isAvailable) {
             System.out.println("You have returned " + title);
             isAvailable = true;
