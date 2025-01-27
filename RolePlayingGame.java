@@ -1,14 +1,119 @@
 package roleplayinggame;
+
+import java.util.Scanner;
+import Classes.Character;
 import Classes.Enemy;
 
-
 public class RolePlayingGame {
+
     public static void main(String[] args) {
-       Enemy goblin = new Enemy("Goblin", 200, 50, 30);
-       Enemy ogre = new Enemy("Ogre", 250, 40, 25);
-       Enemy centaur = new Enemy("Centaur", 225, 45, 45);
-       Enemy orc = new Enemy("Warlock", 240, 50, 40);
-       Enemy dragon = new Enemy("Alduin", 500, 70, 50);
-       
+        Scanner myObj = new Scanner(System.in);
+
+        System.out.println("Dragon Slayer Survival");
+        System.out.println("What is the name of your character?");
+        String charName = myObj.nextLine();
+        System.out.println();
+
+        System.out.println("Choose your job: \nArcher \nWarrior \nMage \nAssassin");
+        String charJob = myObj.nextLine();
+        System.out.println();
+
+        Character heroChar = new Character(charName, charJob);
+
+        Enemy goblin = new Enemy("Goblin", 200, 50, 30, 1000);
+        Enemy ogre = new Enemy("Ogre", 250, 40, 40, 2000);
+        Enemy centaur = new Enemy("Centaur", 225, 45, 60, 3000);
+        Enemy orc = new Enemy("Warlock", 240, 50, 100, 5000);
+        Enemy dragon = new Enemy("Dragon", 500, 70, 200, 10000);
+
+        // Game loop
+        boolean loopBreaker = true;
+        Enemy[] enemies = {goblin, ogre, centaur, orc, dragon};
+        while (loopBreaker) {
+            for (int i = 0; i < enemies.length; i++) {
+                
+                Enemy enemy = enemies[i];
+
+                System.out.println("A " + enemy.getName() + " challenges you to a battle!");
+                System.out.println();
+
+                double heroCharTurnGauge = 0;
+                double enemyTurnGauge = 0;
+                final int turnThreshold = 500;
+
+                // Turn based loop (Based on the speed of character and enemy).
+                while (enemy.getHealth() > 0 && heroChar.getHealth() > 0) {
+
+                    // Increase turn gauges based on speed.
+                    heroCharTurnGauge += heroChar.getSpeed();
+                    enemyTurnGauge += enemy.getSpeed();
+                    String atkChoice = "";
+
+                    if (heroCharTurnGauge >= turnThreshold && enemyTurnGauge >= turnThreshold) {
+
+                        // If both gauges fill at the same time, compare speed to determine who's turn first.
+                        if (heroChar.getSpeed() >= enemy.getSpeed()) {
+                            heroCharTurnGauge -= turnThreshold; // Reset character gauge
+                            System.out.println("Your Health: " + heroChar.getHealth() + "\n" + enemy.getName() + "'s Health: " + enemy.getHealth());
+                            System.out.println("Choose an attack: Normal Punch, Consecutive Normal Punch(CNP), Serious Series, Serious Punch");
+                            atkChoice = myObj.nextLine();
+
+                            // Character move.
+                            heroChar.attack(atkChoice, enemy, heroChar);
+                            System.out.println();
+                        } else {
+                            enemyTurnGauge -= turnThreshold; // Reset enemy gauge
+                            System.out.println(enemy.getName() + " attacks you!");
+
+                            // Enemy move.
+                            heroChar.takeDamageChar(enemy.getDamage());
+                            System.out.println();
+                        }
+                    } else if (heroCharTurnGauge >= turnThreshold) { // Character acts first.
+                        heroCharTurnGauge -= turnThreshold;
+                        heroChar.attack(atkChoice, enemy, heroChar);
+                    } else if (enemyTurnGauge >= turnThreshold) { // Enemy acts first.
+                        enemyTurnGauge -= turnThreshold;
+                        System.out.println(enemy.getName() + " attacks you!");
+                        heroChar.takeDamageChar(enemy.getDamage());
+                    }
+                }
+                if (enemy.getHealth() <= 0) { // Enemy defeat checker.
+                    System.out.println("You have defeated the " + enemy.getName() + "!");
+                    System.out.println("You gained " + enemy.exp + " exp for defeating the " + enemy.getName() + "!");
+                    heroChar.gainExp(enemy.exp);
+                }
+
+                if (heroChar.getHealth() <= 0) { // Character defeat checker.
+                    System.out.println("You have been defeated! Gave Over!");
+                    break;
+                }
+            }
+            
+            // Game restart condition.
+            boolean validInput = true;
+            while (validInput) {
+                System.out.println("Would you like to restart the game? Yes or No?");
+                String choice = myObj.nextLine();
+                
+                if (choice.equalsIgnoreCase("No")) {
+                    System.out.println("The program is now terminated!");
+                    validInput = false;
+                    loopBreaker = false;
+                } else if (choice.equalsIgnoreCase("Yes")) {
+                    validInput = false;
+                    loopBreaker = true;
+                    
+                    for (int i = 0; i < enemies.length; i++) {
+                        Enemy enemy = enemies[i];
+                        enemy.resetEnemy(); // Reset enemies health after finishing the game.
+                    }
+
+                    heroChar.resetCharacter(); // Reset character's health and stats after finishing the game.
+                } else {
+                    System.out.println("You entered an invalid input!");
+                }
+            }
+        }
     }
 }
