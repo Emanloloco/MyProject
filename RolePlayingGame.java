@@ -14,24 +14,40 @@ public class RolePlayingGame {
         String charName = myObj.nextLine();
         System.out.println();
 
-        System.out.println("Choose your job: \nArcher \nWarrior \nMage \nAssassin");
-        String charJob = myObj.nextLine();
-        System.out.println();
+        String charJob = "";
+        boolean validJob = false;
+        do {
+            System.out.println("Choose your job: \nArcher \nWarrior \nMage \nAssassin");
+            charJob = myObj.nextLine();
+            System.out.println();
+
+            switch (charJob.toUpperCase()) {
+                case "ARCHER":
+                case "WARRIOR":
+                case "MAGE":
+                case "ASSASSIN":
+                    validJob = true;
+                    break;
+                default:
+                    System.out.println("The job you chose is invalid!");
+                    System.out.println();
+            }
+        } while (!validJob);
 
         Character heroChar = new Character(charName, charJob);
 
         Enemy goblin = new Enemy("Goblin", 200, 50, 30, 1000);
         Enemy ogre = new Enemy("Ogre", 250, 40, 40, 2000);
         Enemy centaur = new Enemy("Centaur", 225, 45, 60, 3000);
-        Enemy orc = new Enemy("Warlock", 240, 50, 100, 5000);
-        Enemy dragon = new Enemy("Dragon", 500, 70, 200, 10000);
+        Enemy orc = new Enemy("Warlock", 240, 50, 80, 5000);
+        Enemy dragon = new Enemy("Dragon", 500, 70, 95, 10000);
 
         // Game loop
         boolean loopBreaker = true;
         Enemy[] enemies = {goblin, ogre, centaur, orc, dragon};
         while (loopBreaker) {
             for (int i = 0; i < enemies.length; i++) {
-                
+
                 Enemy enemy = enemies[i];
 
                 System.out.println("A " + enemy.getName() + " challenges you to a battle!");
@@ -39,7 +55,7 @@ public class RolePlayingGame {
 
                 double heroCharTurnGauge = 0;
                 double enemyTurnGauge = 0;
-                final int turnThreshold = 500;
+                final int turnThreshold = 100;
 
                 // Turn based loop (Based on the speed of character and enemy).
                 while (enemy.getHealth() > 0 && heroChar.getHealth() > 0) {
@@ -89,13 +105,13 @@ public class RolePlayingGame {
                     break;
                 }
             }
-            
+
             // Game restart condition.
             boolean validInput = true;
             while (validInput) {
                 System.out.println("Would you like to restart the game? Yes or No?");
                 String choice = myObj.nextLine();
-                
+
                 if (choice.equalsIgnoreCase("No")) {
                     System.out.println("The program is now terminated!");
                     validInput = false;
@@ -103,7 +119,7 @@ public class RolePlayingGame {
                 } else if (choice.equalsIgnoreCase("Yes")) {
                     validInput = false;
                     loopBreaker = true;
-                    
+
                     for (int i = 0; i < enemies.length; i++) {
                         Enemy enemy = enemies[i];
                         enemy.resetEnemy(); // Reset enemies health after finishing the game.
