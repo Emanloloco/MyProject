@@ -63,35 +63,50 @@ public class RolePlayingGame {
                     // Increase turn gauges based on speed.
                     heroCharTurnGauge += heroChar.getSpeed();
                     enemyTurnGauge += enemy.getSpeed();
-                    String atkChoice = "";
 
                     if (heroCharTurnGauge >= turnThreshold && enemyTurnGauge >= turnThreshold) {
-
-                        // If both gauges fill at the same time, compare speed to determine who's turn first.
+                        // Simultaneous turns: Faster speed goes first.
                         if (heroChar.getSpeed() >= enemy.getSpeed()) {
-                            heroCharTurnGauge -= turnThreshold; // Reset character gauge
+                            heroCharTurnGauge -= turnThreshold; // Character acts
                             System.out.println("Your Health: " + heroChar.getHealth() + "\n" + enemy.getName() + "'s Health: " + enemy.getHealth());
                             System.out.println("Choose an attack: Normal Punch, Consecutive Normal Punch(CNP), Serious Series, Serious Punch");
-                            atkChoice = myObj.nextLine();
-
-                            // Character move.
-                            heroChar.attack(atkChoice, enemy, heroChar);
+                            String atkChoice = myObj.nextLine();
+                            heroChar.attack(atkChoice, enemy, heroChar); // Character attacks
                             System.out.println();
-                        } else {
-                            enemyTurnGauge -= turnThreshold; // Reset enemy gauge
-                            System.out.println(enemy.getName() + " attacks you!");
 
-                            // Enemy move.
+                            if (enemy.getHealth() > 0) { // Enemy still alive, gets its turn
+                                enemyTurnGauge -= turnThreshold;
+                                System.out.println(enemy.getName() + " attacks you!");
+                                heroChar.takeDamageChar(enemy.getDamage());
+                                System.out.println();
+                            }
+                        } else {
+                            enemyTurnGauge -= turnThreshold; // Enemy acts
+                            System.out.println(enemy.getName() + " attacks you!");
                             heroChar.takeDamageChar(enemy.getDamage());
                             System.out.println();
+
+                            if (heroChar.getHealth() > 0) { // Character still alive, gets its turn
+                                heroCharTurnGauge -= turnThreshold;
+                                System.out.println("Your Health: " + heroChar.getHealth() + "\n" + enemy.getName() + "'s Health: " + enemy.getHealth());
+                                System.out.println("Choose an attack: Normal Punch, Consecutive Normal Punch(CNP), Serious Series, Serious Punch");
+                                String atkChoice = myObj.nextLine();
+                                heroChar.attack(atkChoice, enemy, heroChar);
+                                System.out.println();
+                            }
                         }
-                    } else if (heroCharTurnGauge >= turnThreshold) { // Character acts first.
+                    } else if (heroCharTurnGauge >= turnThreshold) { // Character acts first
                         heroCharTurnGauge -= turnThreshold;
+                        System.out.println("Your Health: " + heroChar.getHealth() + "\n" + enemy.getName() + "'s Health: " + enemy.getHealth());
+                        System.out.println("Choose an attack: Normal Punch, Consecutive Normal Punch(CNP), Serious Series, Serious Punch");
+                        String atkChoice = myObj.nextLine();
                         heroChar.attack(atkChoice, enemy, heroChar);
-                    } else if (enemyTurnGauge >= turnThreshold) { // Enemy acts first.
+                        System.out.println();
+                    } else if (enemyTurnGauge >= turnThreshold) { // Enemy acts first
                         enemyTurnGauge -= turnThreshold;
                         System.out.println(enemy.getName() + " attacks you!");
                         heroChar.takeDamageChar(enemy.getDamage());
+                        System.out.println();
                     }
                 }
                 if (enemy.getHealth() <= 0) { // Enemy defeat checker.
