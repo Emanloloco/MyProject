@@ -1,0 +1,108 @@
+package com.mycompany.evaluationofexpression;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class EvaluationofExpression {
+
+    final static void line() {
+        System.out.println("------------------------------------------------------------");
+    }
+
+    final static void doubleLine() {
+        System.out.println("============================================================");
+    }
+
+    static boolean isOperator(char input) {
+        String operands = "+-*/%^";
+        if (operands.contains(Character.toString(input))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    static int priority(char input) {
+        String inp = Character.toString(input);
+        if (!isOperator(input)) {
+            return -1;
+        } else if ("+-".contains(inp)) {
+            return 1;
+        } else if ("*/%".contains(inp)) {
+            return 2;
+        } else if ("^".contains(inp)) {
+            return 3;
+        } else {
+            return 0;
+        }
+    }
+
+    static void postfixConverter(String input) {
+        Stack<Character> operators = new Stack<Character>();
+        String postfix = "";
+        String displayFormat = "%-6s %-32s %-48s%n";
+        operators.push('#');
+        doubleLine();
+        System.out.println("INPUT EXPRESSION (INFIX): " + input);
+        doubleLine();
+        System.out.printf(displayFormat, "TOKEN", "STACK", "OUTPUT");
+        line();
+        char[] tokens = input.toCharArray();
+        for (int k = 0; k < input.length(); k++) {
+            char c = tokens[k];
+            if (Character.isSpaceChar(c)) {
+                continue;
+            }
+            if (Character.isLetterOrDigit(c)) {
+                if (k + 1 < input.length() && Character.isLetterOrDigit(tokens[k + 1])) {
+                    postfix += c;
+                } else {
+                    postfix += c + " ";
+                }
+
+            } else if (c == '(') {
+                operators.push(c);
+            } else if (c == ')') {
+                while (operators.peek() != '(') {
+                    postfix += operators.pop() + " ";
+                }
+                operators.pop();
+            } // else...
+            else {
+                while (!operators.isEmpty() && (priority(operators.peek()) >= priority(c))) {
+                    postfix += operators.pop() + " ";
+                }
+                operators.push(c);
+            }
+
+            System.out.printf(displayFormat, c, operators, postfix);
+        }
+
+        while (operators.peek() != '#') {
+            postfix += operators.pop() + " ";
+        }
+
+        System.out.printf(displayFormat, '#', operators, postfix + "#");
+
+        doubleLine();
+        System.out.println("FINAL POSTFIX EXPRESSION: " + postfix + "\n");
+    }
+
+    public static void main(String[] args) {
+
+        Scanner inp = new Scanner(System.in);
+
+        do {
+
+            System.out.print("Input infix-form expression, or 'exit': \n > ");
+            String input = inp.nextLine();
+
+            if (input.toUpperCase().equals("EXIT")) {
+                break;
+            }
+
+            postfixConverter(input);
+
+        } while (true);
+    }
+}
