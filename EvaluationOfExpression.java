@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -10,8 +11,12 @@ public class EvaluationOfExpression {
 
     // Method to get the precedence of operators
     private static int precedence(char c) {
-        if (c == '+' || c == '-') return 1;
-        if (c == '*' || c == '/') return 2;
+        if (c == '+' || c == '-') {
+            return 1;
+        }
+        if (c == '*' || c == '/') {
+            return 2;
+        }
         return -1;
     }
 
@@ -70,66 +75,46 @@ public class EvaluationOfExpression {
         return new StringBuilder(reversedPostfix).reverse().toString();
     }
 
-    // Postfix to Infix Conversion
-    public static String postfixToInfix(String postfix) {
-        Stack<String> stack = new Stack<>();
-
-        for (int i = 0; i < postfix.length(); i++) {
-            char c = postfix.charAt(i);
-
-            if (Character.isLetterOrDigit(c)) {
-                stack.push(String.valueOf(c)); // Push operands onto the stack
-            } else if (isOperator(c)) {
-                String operand2 = stack.pop();
-                String operand1 = stack.pop();
-                String expression = "(" + operand1 + c + operand2 + ")";
-                stack.push(expression); // Combine the operands with operator and push back to stack
-            }
-        }
-
-        return stack.pop(); // The final element will be the full expression
-    }
-
-    // Prefix to Infix Conversion
-    public static String prefixToInfix(String prefix) {
-        Stack<String> stack = new Stack<>();
-
-        // Traverse the prefix expression from right to left
-        for (int i = prefix.length() - 1; i >= 0; i--) {
-            char c = prefix.charAt(i);
-
-            if (Character.isLetterOrDigit(c)) {
-                stack.push(String.valueOf(c)); // Push operands onto the stack
-            } else if (isOperator(c)) {
-                String operand1 = stack.pop();
-                String operand2 = stack.pop();
-                String expression = "(" + operand1 + c + operand2 + ")";
-                stack.push(expression); // Combine the operands with operator and push back to stack
-            }
-        }
-
-        return stack.pop(); // The final element will be the full expression
-    }
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Ask the user for an infix expression
-        System.out.print("Enter an infix expression: ");
-        String infix = scanner.nextLine();
+        boolean loopBreaker = true;
 
-        // Convert infix to postfix and prefix
-        String postfix = infixToPostfix(infix);
-        String prefix = infixToPrefix(infix);
+        while (loopBreaker) {
+            // Ask the user for an infix expression
+            System.out.print("Enter an infix expression: ");
+            String infix = scanner.nextLine();
 
-        System.out.println("\nInfix: " + infix);
-        System.out.println("Postfix: " + postfix);
-        System.out.println("Prefix: " + prefix);
+            System.out.println("Type '1' to convert it to prefix and '2' to convert it to postfix");
+            String operationX = scanner.nextLine();
 
-        // Convert postfix and prefix back to infix
-        System.out.println("\nPostfix to Infix: " + postfixToInfix(postfix));
-        System.out.println("Prefix to Infix: " + prefixToInfix(prefix));
+            switch (operationX) {
+                case "1":
+                    String prefix = infixToPrefix(infix); // Convert infix to prefix
+                    System.out.println("Prefix: " + prefix);
+                    break;
+                case "2":
+                    String postfix = infixToPostfix(infix); // Convert infix to postfix
+                    System.out.println("Postfix: " + postfix);
+                    break;
+            }
 
-        scanner.close();
+            boolean validInput = true;
+
+            while (validInput) {
+                System.out.println("Would you like to convert another expression? Yes or No?");
+                String choice = scanner.nextLine();
+                if (choice.equalsIgnoreCase("No")) {
+                    System.out.println("The program is terminated!");
+                    validInput = false;
+                    loopBreaker = false;
+                } else if (choice.equalsIgnoreCase("Yes")) {
+                    validInput = false;
+                    loopBreaker = true;
+                } else {
+                    System.out.println("You enter an invalid input!");
+                }
+            }
+        }
     }
 }
