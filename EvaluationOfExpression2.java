@@ -1,3 +1,4 @@
+package evaluation.of.expression;
 
 import java.util.Scanner;
 import java.util.Stack;
@@ -6,7 +7,7 @@ public class EvaluationOfExpression {
 
     // Method to check if a character is an operator
     private static boolean isOperator(char c) {
-        return c == '+' || c == '-' || c == '*' || c == '/';
+        return c == '+' || c == '-' || c == '*' || c == '/'|| c == '%' || c == '^';
     }
 
     // Method to get the precedence of operators
@@ -14,9 +15,11 @@ public class EvaluationOfExpression {
         if (c == '+' || c == '-') {
             return 1;
         }
-        if (c == '*' || c == '/') {
+        if (c == '*' || c == '/' || c == '%') {
             return 2;
         }
+        if (c == '^')
+            return 3;
         return -1;
     }
 
@@ -87,7 +90,8 @@ public class EvaluationOfExpression {
 
             System.out.println("Type '1' to convert it to prefix and '2' to convert it to postfix");
             String operationX = scanner.nextLine();
-
+            System.out.println();
+            
             switch (operationX) {
                 case "1":
                     String prefix = infixToPrefix(infix); // Convert infix to prefix
@@ -100,6 +104,8 @@ public class EvaluationOfExpression {
             }
 
             boolean validInput = true;
+            
+            System.out.println();
 
             while (validInput) {
                 System.out.println("Would you like to convert another expression? Yes or No?");
@@ -114,7 +120,7 @@ public class EvaluationOfExpression {
                 } else {
                     System.out.println("You enter an invalid input!");
                 }
-            }
+            } System.out.println();
         }
     }
 }
