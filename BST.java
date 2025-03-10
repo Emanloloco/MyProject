@@ -24,11 +24,13 @@ class BSTs {
 
     Node insertRec(Node root, int key) {
         if (root == null) {
-            root = new Node(key);
-            return root;
+            return new Node(key);
         }
-        if (key < root.key) root.left = insertRec(root.left, key);
-        else if (key > root.key) root.right = insertRec(root.right, key);
+        if (key < root.key) {
+            root.left = insertRec(root.left, key);
+        } else if (key > root.key) {
+            root.right = insertRec(root.right, key);
+        }
         return root;
     }
 
@@ -77,10 +79,12 @@ class BSTs {
 
     Node deleteRec(Node root, int key) {
         if (root == null) return root;
-        
-        if (key < root.key) root.left = deleteRec(root.left, key);
-        else if (key > root.key) root.right = deleteRec(root.right, key);
-        else {
+
+        if (key < root.key) {
+            root.left = deleteRec(root.left, key);
+        } else if (key > root.key) {
+            root.right = deleteRec(root.right, key);
+        } else {
             if (root.left == null) return root.right;
             else if (root.right == null) return root.left;
 
@@ -137,8 +141,11 @@ public class BST {
         }
 
         BSTs tree = new BSTs();
+        tree.insert(choice); // Set the chosen root
         for (int num : Tree) {
-            tree.insert(num);
+            if (num != choice) {
+                tree.insert(num);
+            }
         }
 
         System.out.println("\nBST Inorder Traversal:");
