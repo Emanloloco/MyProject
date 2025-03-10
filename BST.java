@@ -72,36 +72,6 @@ class BSTs {
             System.out.print(root.key + " ");
         }
     }
-
-    void deleteKey(int key) {
-        root = deleteRec(root, key);
-    }
-
-    Node deleteRec(Node root, int key) {
-        if (root == null) return root;
-
-        if (key < root.key) {
-            root.left = deleteRec(root.left, key);
-        } else if (key > root.key) {
-            root.right = deleteRec(root.right, key);
-        } else {
-            if (root.left == null) return root.right;
-            else if (root.right == null) return root.left;
-
-            root.key = minValue(root.right);
-            root.right = deleteRec(root.right, root.key);
-        }
-        return root;
-    }
-
-    int minValue(Node root) {
-        int minVal = root.key;
-        while (root.left != null) {
-            minVal = root.left.key;
-            root = root.left;
-        }
-        return minVal;
-    }
 }
 
 public class BST {
@@ -154,12 +124,5 @@ public class BST {
         tree.preorder();
         System.out.println("BST Postorder Traversal:");
         tree.postorder();
-
-        System.out.print("\nEnter a value to delete: ");
-        int deleteVal = sc.nextInt();
-
-        tree.deleteKey(deleteVal);
-        System.out.println("BST after deletion (Inorder Traversal):");
-        tree.inorder();
     }
 }
